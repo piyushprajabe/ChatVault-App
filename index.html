@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatVault - Secure Anonymous Chat</title>
     
-    <!-- Google Site Verification -->
+    <!-- Google Site Verification (Optional, but good to have) -->
     <meta name="google-site-verification" content="_ipV3-RouS8rBdaAm22S803xDQzjGVKGkKL5OygOiFk" />
 
     <!-- Tailwind CSS -->
@@ -16,14 +16,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Internal CSS for animations and custom styles -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Base dark background */
         }
         .glass-effect {
-            background: rgba(23, 31, 42, 0.6); /* Thicker background */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(17, 24, 39, 0.6); 
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
@@ -48,36 +51,84 @@
             40% { left: 150%; }
             100% { left: 150%; }
         }
-        @keyframes blob-animation {
-            0% { transform: translate(0px, 0px) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(0px, 0px) scale(1); }
+
+        /* New Aesthetic Animated Gradient Background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
         }
-        .animate-blob {
-            animation: blob-animation 8s infinite;
+
+        .gradient-bg div {
+            position: absolute;
+            filter: blur(100px);
+            opacity: 0.6;
+            border-radius: 50%;
         }
-        .animation-delay-4000 {
-            animation-delay: -4s;
+
+        .gradient-1 {
+            width: 600px;
+            height: 600px;
+            background: rgba(59, 130, 246, 0.2); /* Blue */
+            top: -150px;
+            left: -150px;
+            animation: gradient-move 15s infinite alternate;
         }
+
+        .gradient-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(168, 85, 247, 0.15); /* Purple */
+            bottom: -100px;
+            right: -100px;
+            animation: gradient-move 18s infinite alternate;
+            animation-delay: -5s;
+        }
+
+        .gradient-3 {
+            width: 400px;
+            height: 400px;
+            background: rgba(236, 240, 241, 0.15); /* Soft White/Light Gray */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: gradient-move 20s infinite alternate;
+            animation-delay: -10s;
+        }
+
+        @keyframes gradient-move {
+            from {
+                transform: rotate(0deg) translate(-100px) rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg) translate(-100px) rotate(-360deg);
+            }
+        }
+
     </style>
 </head>
-<body class="bg-gray-900 text-white antialiased">
+<body class="text-white antialiased">
 
-    <!-- Background Gradient & Blur Effect -->
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div class="absolute top-[-20%] left-[-10%] w-96 h-96 bg-blue-600/20 rounded-full filter blur-3xl opacity-60 animate-blob"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-600/20 rounded-full filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
+    <!-- New Animated Gradient Background -->
+    <div class="gradient-bg">
+        <div class="gradient-1"></div>
+        <div class="gradient-2"></div>
+        <div class="gradient-3"></div>
     </div>
 
+    <!-- Main Content Wrapper -->
     <div class="relative min-h-screen flex flex-col items-center justify-center p-4 z-10">
         
         <!-- Main Card -->
         <div class="w-full max-w-md mx-auto glass-effect rounded-2xl p-8 text-center transition-all duration-300 hover:shadow-blue-500/20 hover:shadow-2xl">
             
-            <!-- App Logo -->
+            <!-- App Icon -->
             <div class="mx-auto bg-blue-600/10 rounded-full h-24 w-24 flex items-center justify-center border-2 border-blue-500/30 mb-4">
-                <i class="fas fa-shield-alt text-4xl text-blue-300"></i>
+                <i class="fas fa-cloud-arrow-down text-4xl text-blue-300"></i>
             </div>
 
             <!-- App Name and Tagline -->
@@ -101,43 +152,41 @@
 
         <!-- How to Install Section -->
         <div class="w-full max-w-md mx-auto mt-6 text-sm text-gray-500 text-center glass-effect rounded-2xl p-4">
-            <h3 class="font-semibold text-gray-300 mb-2 flex items-center justify-center gap-2"><i class="fas fa-info-circle"></i>How to Install?</h3>
-            <p>After downloading, you may need to enable "Install from unknown sources" in your phone's settings. The "Harmful App" warning appears because the app is not on the Google Play Store. It is safe to install.</p>
+            <h3 class="font-semibold text-gray-300 mb-2 flex items-center justify-center gap-2"><i class="fas fa-info-circle"></i>Important Note</h3>
+            <p>This app is not on the Google Play Store. Android may show a "Harmful App" warning. This is a standard security measure. You can safely ignore it and tap "Install anyway".</p>
         </div>
     </div>
 
+    <!-- JavaScript Section -->
     <script>
         // --- AAP APNA DATA YAHA EDIT KAREIN ---
-
         const appVersions = [
             {
                 version: "1.1",
                 date: "July 11, 2025",
-                // Yaha apni v1.1 APK ka download link daalein
                 url: "https://github.com/piyushprajabe/ChatVault-App/releases/download/v1.1/app-debug.apk",
                 changelog: "Fixed text color bug in input fields."
             },
             {
                 version: "1.0",
                 date: "July 9, 2025",
-                // Purane version ka link hata diya hai, isliye '#' rakha hai
-                url: "#", 
+                url: "#", // Purane version ka link nahi hai
                 changelog: "Initial release."
             }
         ];
 
-        // --- YAHAN SE AAGE CODE EDIT NA KAREIN ---
-
+        // --- DYNAMIC CONTENT SCRIPT ---
+        // Is code ko edit na karein
         document.addEventListener('DOMContentLoaded', function() {
             const versionList = document.getElementById('version-list');
             const latestDownloadLink = document.getElementById('latest-download-link');
 
             if (appVersions.length > 0) {
-                // Set latest download link
+                // Mukhya download button ka link aur text set karein
                 latestDownloadLink.href = appVersions[0].url;
                 latestDownloadLink.querySelector('span').innerHTML = `Download Latest (v${appVersions[0].version})`;
 
-                // Populate version history
+                // Version history ki list banayein
                 appVersions.forEach(v => {
                     const versionItem = document.createElement('div');
                     versionItem.className = 'flex justify-between items-center bg-gray-800/50 p-3 rounded-lg hover:bg-gray-700/70 transition-colors';
