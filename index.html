@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatVault - Secure Anonymous Chat</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            animation: shine 5s infinite;
+        }
+        @keyframes shine {
+            0% { left: -150%; }
+            50% { left: 150%; }
+            100% { left: 150%; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- Background Blur Effect -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <div class="absolute top-[-20%] left-[-10%] w-96 h-96 bg-blue-600/30 rounded-full filter blur-3xl opacity-50 animate-blob"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-600/30 rounded-full filter blur-3xl opacity-50 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <div class="relative min-h-screen flex flex-col items-center justify-center p-4 z-10">
+        
+        <!-- Main Card -->
+        <div class="w-full max-w-md mx-auto glass-effect rounded-2xl shadow-2xl p-8 text-center">
+            
+            <!-- App Logo -->
+            <div class="mx-auto bg-blue-600/20 rounded-full h-24 w-24 flex items-center justify-center border-2 border-blue-500/50 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+            </div>
+
+            <!-- App Name and Tagline -->
+            <h1 class="text-4xl font-bold text-white mb-2">ChatVault</h1>
+            <p class="text-gray-400 mb-8">Secure, Anonymous Chat Rooms.</p>
+
+            <!-- Download Button for Latest Version -->
+            <a href="#" id="latest-download-link" class="shine-effect block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-lg transition-transform transform hover:scale-105 mb-6">
+                Download Latest (v1.2)
+            </a>
+
+            <!-- Version History Section -->
+            <div class="text-left">
+                <h2 class="text-xl font-semibold mb-4 border-b border-gray-700 pb-2">Version History</h2>
+                <div id="version-list" class="space-y-3 max-h-48 overflow-y-auto pr-2">
+                    <!-- JavaScript will populate this section -->
+                </div>
+            </div>
+        </div>
+
+        <!-- How to Install Section -->
+        <div class="w-full max-w-md mx-auto mt-6 text-sm text-gray-500 text-center glass-effect rounded-2xl p-4">
+            <h3 class="font-semibold text-gray-300 mb-2">How to Install?</h3>
+            <p>After downloading, you may need to enable "Install from unknown sources" in your phone's settings. The "Harmful App" warning appears because the app is not on the Google Play Store. It is safe to install.</p>
+        </div>
+    </div>
+
+    <script>
+        // --- AAP APNA DATA YAHA EDIT KAREIN ---
+
+        const appVersions = [
+            {
+                version: "1.2",
+                date: "July 11, 2025",
+                // Yaha apni v1.2 APK ka download link daalein
+                url: "https://firebasestorage.googleapis.com/v0/b/your-project-id.appspot.com/o/app-v1.2.apk?alt=media&token=...",
+                changelog: "Fixed text color bug in input fields."
+            },
+            {
+                version: "1.1",
+                date: "July 10, 2025",
+                // Yaha apni v1.1 APK ka download link daalein
+                url: "#",
+                changelog: "Improved UI animations."
+            },
+            {
+                version: "1.0",
+                date: "July 9, 2025",
+                // Yaha apni v1.0 APK ka download link daalein
+                url: "#",
+                changelog: "Initial release."
+            }
+        ];
+
+        // --- YAHAN SE AAGE CODE EDIT NA KAREIN ---
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const versionList = document.getElementById('version-list');
+            const latestDownloadLink = document.getElementById('latest-download-link');
+
+            if (appVersions.length > 0) {
+                // Set latest download link
+                latestDownloadLink.href = appVersions[0].url;
+                latestDownloadLink.innerHTML = `Download Latest (v${appVersions[0].version})`;
+
+                // Populate version history
+                appVersions.forEach(v => {
+                    const versionItem = document.createElement('div');
+                    versionItem.className = 'flex justify-between items-center bg-gray-800/50 p-3 rounded-lg';
+                    
+                    const versionInfo = document.createElement('div');
+                    const versionTag = document.createElement('span');
+                    versionTag.className = 'font-bold text-white';
+                    versionTag.textContent = `Version ${v.version}`;
+                    
+                    const dateTag = document.createElement('span');
+                    dateTag.className = 'block text-xs text-gray-400';
+                    dateTag.textContent = v.date;
+
+                    versionInfo.appendChild(versionTag);
+                    versionInfo.appendChild(dateTag);
+
+                    const downloadButton = document.createElement('a');
+                    downloadButton.href = v.url;
+                    downloadButton.className = 'bg-gray-700 hover:bg-blue-600 text-white text-xs font-semibold py-1 px-3 rounded-full transition';
+                    downloadButton.textContent = 'Download';
+
+                    versionItem.appendChild(versionInfo);
+                    versionItem.appendChild(downloadButton);
+                    versionList.appendChild(versionItem);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
