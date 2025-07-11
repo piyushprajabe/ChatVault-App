@@ -13,20 +13,24 @@
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
         .glass-effect {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(23, 31, 42, 0.6); /* Thicker background */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
         .shine-effect {
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
         }
         .shine-effect::before {
             content: '';
@@ -35,44 +39,55 @@
             left: -150%;
             width: 50%;
             height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
             transform: skewX(-25deg);
-            animation: shine 5s infinite;
+            animation: shine 5s infinite ease-in-out;
         }
         @keyframes shine {
             0% { left: -150%; }
-            50% { left: 150%; }
+            40% { left: 150%; }
             100% { left: 150%; }
+        }
+        @keyframes blob-animation {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+            animation: blob-animation 8s infinite;
+        }
+        .animation-delay-4000 {
+            animation-delay: -4s;
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="bg-gray-900 text-white antialiased">
 
-    <!-- Background Blur Effect -->
+    <!-- Background Gradient & Blur Effect -->
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div class="absolute top-[-20%] left-[-10%] w-96 h-96 bg-blue-600/30 rounded-full filter blur-3xl opacity-50 animate-blob"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-600/30 rounded-full filter blur-3xl opacity-50 animate-blob animation-delay-4000"></div>
+        <div class="absolute top-[-20%] left-[-10%] w-96 h-96 bg-blue-600/20 rounded-full filter blur-3xl opacity-60 animate-blob"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-600/20 rounded-full filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
     </div>
 
     <div class="relative min-h-screen flex flex-col items-center justify-center p-4 z-10">
         
         <!-- Main Card -->
-        <div class="w-full max-w-md mx-auto glass-effect rounded-2xl shadow-2xl p-8 text-center">
+        <div class="w-full max-w-md mx-auto glass-effect rounded-2xl p-8 text-center transition-all duration-300 hover:shadow-blue-500/20 hover:shadow-2xl">
             
             <!-- App Logo -->
-            <div class="mx-auto bg-blue-600/20 rounded-full h-24 w-24 flex items-center justify-center border-2 border-blue-500/50 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
+            <div class="mx-auto bg-blue-600/10 rounded-full h-24 w-24 flex items-center justify-center border-2 border-blue-500/30 mb-4">
+                <i class="fas fa-shield-alt text-4xl text-blue-300"></i>
             </div>
 
             <!-- App Name and Tagline -->
-            <h1 class="text-4xl font-bold text-white mb-2">ChatVault</h1>
+            <h1 class="text-4xl font-extrabold text-white mb-2">ChatVault</h1>
             <p class="text-gray-400 mb-8">Secure, Anonymous Chat Rooms.</p>
 
             <!-- Download Button for Latest Version -->
-            <a href="#" id="latest-download-link" class="shine-effect block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-lg transition-transform transform hover:scale-105 mb-6">
-                Download Latest
+            <a href="#" id="latest-download-link" class="shine-effect flex items-center justify-center gap-3 w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-lg text-lg transition-transform transform hover:scale-105 mb-6">
+                <i class="fas fa-download"></i>
+                <span>Download Latest</span>
             </a>
 
             <!-- Version History Section -->
@@ -86,7 +101,7 @@
 
         <!-- How to Install Section -->
         <div class="w-full max-w-md mx-auto mt-6 text-sm text-gray-500 text-center glass-effect rounded-2xl p-4">
-            <h3 class="font-semibold text-gray-300 mb-2">How to Install?</h3>
+            <h3 class="font-semibold text-gray-300 mb-2 flex items-center justify-center gap-2"><i class="fas fa-info-circle"></i>How to Install?</h3>
             <p>After downloading, you may need to enable "Install from unknown sources" in your phone's settings. The "Harmful App" warning appears because the app is not on the Google Play Store. It is safe to install.</p>
         </div>
     </div>
@@ -105,8 +120,8 @@
             {
                 version: "1.0",
                 date: "July 9, 2025",
-                // Yaha apni v1.0 APK ka download link daalein
-                url: "#",
+                // Purane version ka link hata diya hai, isliye '#' rakha hai
+                url: "#", 
                 changelog: "Initial release."
             }
         ];
@@ -120,12 +135,12 @@
             if (appVersions.length > 0) {
                 // Set latest download link
                 latestDownloadLink.href = appVersions[0].url;
-                latestDownloadLink.innerHTML = `Download Latest (v${appVersions[0].version})`;
+                latestDownloadLink.querySelector('span').innerHTML = `Download Latest (v${appVersions[0].version})`;
 
                 // Populate version history
                 appVersions.forEach(v => {
                     const versionItem = document.createElement('div');
-                    versionItem.className = 'flex justify-between items-center bg-gray-800/50 p-3 rounded-lg';
+                    versionItem.className = 'flex justify-between items-center bg-gray-800/50 p-3 rounded-lg hover:bg-gray-700/70 transition-colors';
                     
                     const versionInfo = document.createElement('div');
                     const versionTag = document.createElement('span');
@@ -139,13 +154,21 @@
                     versionInfo.appendChild(versionTag);
                     versionInfo.appendChild(dateTag);
 
-                    const downloadButton = document.createElement('a');
-                    downloadButton.href = v.url;
-                    downloadButton.className = 'bg-gray-700 hover:bg-blue-600 text-white text-xs font-semibold py-1 px-3 rounded-full transition';
-                    downloadButton.textContent = 'Download';
-
                     versionItem.appendChild(versionInfo);
-                    versionItem.appendChild(downloadButton);
+
+                    if (v.url && v.url !== "#") {
+                        const downloadButton = document.createElement('a');
+                        downloadButton.href = v.url;
+                        downloadButton.className = 'bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-1 px-3 rounded-full transition-transform transform hover:scale-110';
+                        downloadButton.innerHTML = `<i class="fas fa-download"></i>`;
+                        versionItem.appendChild(downloadButton);
+                    } else {
+                        const archivedTag = document.createElement('span');
+                        archivedTag.className = 'text-gray-500 text-xs font-semibold py-1 px-3';
+                        archivedTag.textContent = 'Archived';
+                        versionItem.appendChild(archivedTag);
+                    }
+                    
                     versionList.appendChild(versionItem);
                 });
             }
